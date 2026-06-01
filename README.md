@@ -1,10 +1,11 @@
 **INSTRUCTOR DETAILS**
 
-| Information      | Details                                                      |
-| ---------------- | ------------------------------------------------------------ |
-| Name             | Ikponmwonsa Okundigie                                        |
-| Email            | okundigieamen@gmail.com                                      |
-| Website          | https://dev.to/ikay                                          |
+
+| Information |	Details |
+| ------------| ------- |
+| Name	| Ikponmwonsa Okundigie |
+| Email | okundigieamen@gmail.com |
+| Website | https://dev.to/ikay |
 | LinkedIn profile | https://www.linkedin.com/in/ikponmwonsa-okundigie-7731a92b6/ |
 
 # The Ultimate Linux Command Cheatsheet for Real-World DevOps & Cloud Engineers
