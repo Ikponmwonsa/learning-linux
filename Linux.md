@@ -5,13 +5,13 @@ In Linux, creating and deleting users can be done using commands such as `userad
 **Creating a User**
 To create a new user on your system, you can use either of the following commands:
 
-1. `**useradd**` Command:
+1. **`useradd`** Command:
 
 ```bash
 useradd username
 ```
 
-2. `**adduser**` Command (more user-friendly):
+2. **`adduser`** Command (more user-friendly):
 
 In some Linux distributions (like Debian-based systems), adduser is a more user-friendly script for creating users.
 
