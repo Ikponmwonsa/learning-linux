@@ -1,504 +1,462 @@
-I built a real-world Linux + DevOps production environment simulating a fintech infrastructure using Ubuntu, Docker, NGINX, Bash scripting, GitHub Actions, and cloud deployment practices.
-This project helped me understand:
+**INSTRUCTOR DETAILS**
 
-- [x] Linux Administration
-- [x] Production Troubleshooting
-- [x] Docker & Container
-- [x] Monitoring & Logging
-- [x] CI/CD Pipelines
-- [x] Infrastructure Automation
-- [x] DevOps Workflows
 
----
+| Information |	Details |
+| Name	| Ikponmwonsa Okundigie |
+| Email | okundigieamen@gmail.com |
+| Website | https://dev.to/ikay |
+| LinkedIn profile | https://www.linkedin.com/in/ikponmwonsa-okundigie-7731a92b6/ |
 
-# REAL LIVE LINUX + DEVOPS PROJECT
+# The Ultimate Linux Command Cheatsheet for Real-World DevOps & Cloud Engineers
 
-**“Enterprise FinTech Infrastructure Simulation”**
+If you want to stand out as a Cloud Engineer, DevOps Engineer, Systems Administrator, SRE, Platform Engineer, or Backend Engineer, Linux is not optional — it is the backbone of modern infrastructure.
 
-This project will simulate what happens inside a real tech company.
+From AWS EC2 servers to Azure Virtual Machines, Docker containers, Kubernetes clusters, CI/CD pipelines, cybersecurity operations, and enterprise automation — Linux powers nearly everything.
 
-You will act as:
+This guide is designed like a real-world tech company environment.
 
-- Linux System Administrator
-- Cloud Engineer
-- DevOps Engineer
-- Site Reliability Engineer (SRE)
+You’ll learn:
 
----
+- Essential Linux commands
+- Real enterprise scenarios
+- Production troubleshooting
+- Cloud & DevOps workflows
+- Security operations
+- Networking
+- Monitoring
+- GitHub project structure
+- Resume-ready project experience
 
-# PROJECT OVERVIEW
+Real-World Scenario
 
-**Business Scenario**
+Imagine you just got hired as a Junior Cloud/DevOps Engineer at a fintech company.
 
-A fintech startup called **PayFlowX** needs infrastructure for:
+Your daily responsibilities include:
 
-- Hosting a payment API
-- Running a web application
-- Monitoring server health
+- Managing Linux servers on AWS/Azure
+- Monitoring applications
+- Troubleshooting outages
+- Managing users and permissions
 - Automating backups
-- Managing Linux users
-- Running Docker containers
-- Reverse proxy using NGINX
-- CI/CD deployment pipeline
-- Incident monitoring
+- Configuring NGINX
+- Deploying applications
+- Checking logs
+- Monitoring CPU/RAM
+- Using Git and Docker
+- Handling incidents during production outages
 
-You are the Devops Engineer responsible.
+This cheatsheet teaches Linux exactly the way engineers use it in real companies.
+
+1. ## Linux Navigation Commands
+
+These are the commands engineers use every minute.
+
+```bash
+| Command  | Purpose                  | Real-World Scenario                    |
+| -------- | ------------------------ | -------------------------------------- |
+| `pwd`    | Show current directory   | Confirm server path before deployment  |
+| `ls`     | List files               | Check application files                |
+| `ls -la` | Detailed hidden files    | Inspect `.env` or config files         |
+| `cd`     | Change directory         | Navigate to app folders                |
+| `clear`  | Clear terminal           | Clean workspace during troubleshooting |
+| `tree`   | Display folder structure | Visualize project architecture         |
+```
+
+Example
+
+```bash
+pwd
+ls -la
+cd /var/www/application
+```
+
+**_Real Company Usage_**
+
+A DevOps engineer checks deployment folders before restarting production services.
 
 ---
 
-# PROJECT ARCHITECTURE
+2. ## File & Directory Management
 
-                     INTERNET
-                         │
-                         ▼
-                  NGINX Reverse Proxy
-                         │
-        ┌────────────────────────────────┐
-        │                                │
-        ▼                                ▼
+```bash
+| Command          | Purpose                      |
+| ---------------- | ---------------------------- |
+| `touch file.txt` | Create file                  |
+| `mkdir logs`     | Create folder                |
+| `rm file.txt`    | Delete file                  |
+| `rm -rf folder`  | Delete directory recursively |
+| `cp file1 file2` | Copy file                    |
+| `mv old new`     | Rename/move file             |
+```
 
-Docker Container 1 Docker Container 2
-Frontend App Backend API
-│ │
-└──────────────┬─────────────────┘
-▼
-Linux Ubuntu Server
-│
-┌─────────────┼─────────────┐
-▼ ▼ ▼
-Monitoring Backups Logging
+Example
+
+```bash
+mkdir backup
+cp app.log backup/
+mv old.conf new.conf
+```
+
+**_Real Scenario_**
+
+Before updating production configs, engineers back up old configuration files.
 
 ---
 
-# TECH STACK
+3. ## Viewing File Content
 
-| Technology           | Purpose          |
-| -------------------- | ---------------- |
-| Ubuntu Linux         | Server OS        |
-| Docker               | Containerization |
-| NGINX                | Reverse proxy    |
-| GitHub               | GitHub           |
-| Bash Scripting       | Automation       |
-| AWS EC2 / VirtualBox | Hosting          |
-| GitHub Actions       | CI/CD            |
-| Linux Commands       | Administration   |
-| SSH                  | Remote access    |
-| Journalctl           | Logs             |
-| Htop                 | Monitoring       |
+```bash
+| Command   | Purpose             |
+| --------- | ------------------- |
+| `cat`     | View entire file    |
+| `less`    | Scroll through logs |
+| `head`    | First lines         |
+| `tail`    | Last lines          |
+| `tail -f` | Live log monitoring |
+```
+
+Example
+
+```bash
+tail -f /var/log/nginx/error.log
+```
+
+**_Real Scenario_**
+During outages, engineers monitor live application logs.
 
 ---
 
-## STEP 1 — CREATE YOUR SERVER
+4. ## User & Permission Management
+   Linux security heavily depends on permissions.
 
-**OPTION A — AWS EC2**
-
-**Create:**
-
-- Ubuntu Server 22.04
-- t2.micro
-- Allow:
-  - SH (22)
-  - HTTP (80)
-  - HTTPS (443)
-
-**Connect**
-
-```Bash
-ssh -i key.pem ubuntu@your-public-ip
+```bash
+| Command   | Purpose              |
+| --------- | -------------------- |
+| `whoami`  | Current user         |
+| `sudo`    | Run as administrator |
+| `useradd` | Create user          |
+| `passwd`  | Set password         |
+| `chmod`   | Change permissions   |
+| `chown`   | Change ownership     |
 ```
 
----
+Example
 
-**OPTION B — VirtualBox**
-
-Install:
-
-- Ubuntu Server ISO
-- 2GB RAM
-- 20GB Storage
-
----
-
-## STEP 2 — PROJECT STRUCTURE
-
-```Plain text
-
-payflowx-devops-project/
-│
-├── app/
-│ ├── frontend/
-│ └── backend/
-│
-├── nginx/
-│ └── nginx.conf
-│
-├── scripts/
-│ ├── backup.sh
-│ ├── cleanup.sh
-│ └── monitor.sh
-│
-├── docker/
-│ └── Dockerfile
-│
-├── logs/
-│
-├── screenshots/
-│
-├── README.md
-│
-└── deployment-guide.md
-```
-
----
-
-## STEP 3 — INSTALL SOFTWARE ESSENTIAL TOOLS
-
-```Bash
-sudo apt update
-
-sudo apt install -y \
-docker.io \
-nginx \
-git \
-curl \
-wget \
-htop \
-net-tools
-```
-
----
-
-## STEP 4 — CREATE A SIMPLE APPLICATION
-
-### Backend API
-
-**Create folder:**
-
-```Bash
-mkdir -p app/backend
-cd app/backend
-```
-
-Create file:
-
-```Bash
-nano app.py
-```
-
-**Paste:**
-
-```python
-
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "PayFlowX API Running Successfully"
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
-```
-
----
-
-## STEP 5 — CREATE DOCKERFILE
-
-```Bash
-nano Dockerfile
-```
-
-**Paste:**
-
-```Dockerfile
-
-FROM python:3.10
-
-WORKDIR /app
-
-COPY . .
-
-RUN pip install flask
-
-CMD ["python", "app.py"]
-```
-
----
-
-## STEP 6 — BUILD & RUN CONTAINER
-
-```Bash
-docker build -t payflowx-api .
-
-docker run -d -p 5000:5000 payflowx-api
-```
-
-**Verify:**
-
-```docker ps
-curl localhost:5000
-```
-
-**Expected:**
-
-```Plain Text
-PayFlowX API Running Successfully
-```
-
----
-
-## STEP 7 — CONFIGURE NGINX REVERSE PROXY
-
-```Bash
-sudo nano /etc/nginx/sites-available/payflowx
-```
-
-**Paste:**
-
-```Nginx
-server {
-    listen 80;
-
-    location / {
-        proxy_pass http://127.0.0.1:5000;
-    }
-}
-```
-
-**Enable:**
-
-```Bash
-sudo ln -s /etc/nginx/sites-available/payflowx /etc/nginx/sites-enabled/
-
-sudo nginx -t
-
-sudo systemctl restart nginx
-```
-
----
-
-# REAL-WORLD SCENARIO
-
-Now your fintech API is:
-
-- Running in Docker
-- Behind NGINX
-- Accessible publicly
-- Hosted on Linux
-
-This mirrors real production infrastructure.
-
----
-
-## STEP 8 — USER MANAGEMENT
-
-**Create developers:**
-
-```Bash
+```bash
 sudo useradd devops
-sudo useradd backend
 sudo passwd devops
+chmod 755 deploy.sh
+chown ubuntu:ubuntu app.py
 ```
 
-**Grant sudo access:**
+**_Real Scenario_**
 
-```Bash
-sudo usermod -aG sudo devops
-```
+New engineers receive SSH access to production servers.
 
 ---
 
-# STEP 9 — SERVER MONITORING
+5. ## Process Management
 
-**CPU & RAM**
-
-```Bash
-
-top
-htop
-free -m
+```bash
+| Command       | Purpose                     |
+| ------------- | --------------------------- |
+| `ps aux`      | Show running processes      |
+| `top`         | Real-time system monitoring |
+| `htop`        | Interactive monitoring      |
+| `kill PID`    | Stop process                |
+| `pkill nginx` | Kill by name                |
 ```
 
-**Disk**
+Example
 
-```Bash
+```bash
+ps aux | grep nginx
+kill 2334
+```
+
+**_Real Scenario_**
+
+An application crashes and consumes 100% CPU. Engineers identify and stop the faulty process.
+
+---
+
+6. ## Networking Commands
+   Critical for Cloud & DevOps.
+
+```bash
+| Command          | Purpose                |
+| ---------------- | ---------------------- |
+| `ping`           | Connectivity test      |
+| `curl`           | API testing            |
+| `wget`           | Download files         |
+| `netstat -tulnp` | Open ports             |
+| `ss -tulnp`      | Modern port inspection |
+| `ip a`           | Show IP address        |
+| `traceroute`     | Network path           |
+```
+
+Example
+
+```bash
+curl http://localhost:8080
+ping google.com
+ss -tulnp
+```
+
+**_Real Scenario_**
+
+Engineers verify APIs after deployment.
+
+---
+
+7. ## Disk & Storage Management
+
+```bash
+| Command  | Purpose         |
+| -------- | --------------- |
+| `df -h`  | Disk usage      |
+| `du -sh` | Folder size     |
+| `mount`  | Mounted drives  |
+| `lsblk`  | Storage devices |
+```
+
+Example
+
+```bash
 df -h
 du -sh /var/log
 ```
 
-**Logs**
+**_Real Scenario_**
 
-```Bash
+Production server runs out of disk space due to large logs.
+
+---
+
+8. ## Package Management
+   Ubuntu/Debian
+
+```bash
+sudo apt update
+sudo apt install nginx
+```
+
+**RHEL/CentOS**
+
+```bash
+sudo yum install nginx
+```
+
+**_Real Scenario_**
+
+Installing monitoring agents or web servers.
+
+---
+
+9. ## Service Management (Systemd)
+
+```bash
+| Command                   | Purpose       |
+| ------------------------- | ------------- |
+| `systemctl start nginx`   | Start service |
+| `systemctl stop nginx`    | Stop service  |
+| `systemctl restart nginx` | Restart       |
+| `systemctl status nginx`  | Check status  |
+| `systemctl enable nginx`  | Auto-start    |
+```
+
+Example
+
+```bash
+sudo systemctl restart nginx
+sudo systemctl status nginx
+```
+
+**_Real Scenario_**
+Restarting applications after deployment.
+
+---
+
+10. ## Linux Logs & Monitoring
+
+```bash
+| Command      | Purpose       |
+| ------------ | ------------- |
+| `journalctl` | System logs   |
+| `dmesg`      | Kernel logs   |
+| `free -m`    | Memory usage  |
+| `uptime`     | System uptime |
+```
+
+Example
+
+```bash
 journalctl -u nginx
-
-tail -f /var/log/nginx/access.log
+free -m
 ```
+
+**_Real Scenario_**
+Troubleshooting server crashes.
 
 ---
 
-# STEP 10 — INCIDENT RESPONSE SIMULATION
+11. ## SSH & Remote Access
 
-**Scenario**
-
-Website becomes unavailable.
-Troubleshooting Workflow
-
-**Check Container**
-
-```Bash
-docker ps
+```bash
+| Command | Purpose      |
+| ------- | ------------ |
+| `ssh`   | Remote login |
+| `scp`   | Secure copy  |
+| `rsync` | File sync    |
 ```
 
-**Check NGINX**
+Example
 
-```Bash
+```bash
+ssh ubuntu@10.0.0.5
+scp app.py ubuntu@10.0.0.5:/var/www
+```
+
+**_Real Scenario_**
+Deploying applications to cloud servers.
+
+---
+
+12. ## Linux + Git Workflow
+
+```bash
+| Command         | Purpose        |
+| --------------- | -------------- |
+| `git clone`     | Download repo  |
+| `git status`    | Check changes  |
+| `git add .`     | Stage files    |
+| `git commit -m` | Commit         |
+| `git push`      | Upload changes |
+```
+
+Example
+
+```bash
+git clone repo-url
+git add .
+git commit -m "Updated deployment script"
+git push origin main
+```
+
+**_Real Scenario_**
+Pushing infrastructure automation scripts.
+
+---
+
+13. ## Linux + Docker Workflow
+    Docker Commands
+
+```bash
+| Command         | Purpose            |
+| --------------- | ------------------ |
+| `docker ps`     | Running containers |
+| `docker images` | Images             |
+| `docker build`  | Build image        |
+| `docker run`    | Run container      |
+| `docker logs`   | View logs          |
+```
+
+Example
+
+```bash
+docker build -t fintech-app .
+docker run -d -p 80:80 fintech-app
+```
+
+**_Real Scenario_**
+
+Deploying containerized microservices.
+
+---
+
+14. ## Linux + AWS Real Scenario
+    **Situation**
+
+Your production API is down.
+**Troubleshooting Steps**
+
+```bash
+ssh ubuntu@server-ip
+
 systemctl status nginx
+
+tail -f /var/log/nginx/error.log
+
+df -h
+
+free -m
+
+curl localhost:8000
 ```
 
-**Check Ports**
+**Root Cause**
 
-``Bash
-ss -tulnp
+Disk became full due to oversized logs.
 
-````
+**Resolution**
 
-**Check Logs**
-```Bash
-tail -f /var/log/nginx/error.log
-````
+```bash
+rm -rf old-logs
+systemctl restart nginx
+```
+
+**Business Impact**
+
+Application restored for thousands of customers.
+
+This is exactly what recruiters want to hear.
 
 ---
 
-# STEP 11 — AUTOMATE BACKUPS SCRIPT
+15. ## Linux Automation with Bash Scripting
 
-**Create:**
+**backup.sh**
 
-```Bash
-nano backup.sh
-```
-
-**Paste:**
-
-```Bash
+```bash
 #!/bin/bash
+
 DATE=$(date +%F)
 
-tar -czf /backup/payflowx-$DATE.tar.gz /home/ubuntu/payflowx-devops-project
+tar -czf backup-$DATE.tar.gz /var/www/html
 
-echo "Backup Completed"
+echo "Backup completed"
 ```
 
-**Make executable:**
+**Run Script**
 
-```Bash
+```bash
 chmod +x backup.sh
-```
-
-**Run:**
-
-```Bash
 ./backup.sh
 ```
 
----
+**Real Scenario**
 
-# STEP 12 — AUTOMATE USING CRON JOBS
-
-```Bash
-crontab -e
-```
-
-**Add:**
-
-```Bash
-0 2 * * * /home/ubuntu/scripts/backup.sh
-```
-
-This will run the backup script daily at 2 AM.
-
-# STEP 13 — SECURITY HARDENING
-
-**Firewall**
-
-```Bash
-sudo ufw allow OpenSSH
-sudo ufw allow 80
-sudo ufw enable
-```
-
-**Fail2Ban**
-
-```Bash
-sudo apt install fail2ban
-```
+Automated nightly backups for production systems.
 
 ---
 
-# STEP 14 — GITHUB INTEGRATION
+16. ## CI/CD Linux Deployment Flow
+    **Pipeline Flow**
 
-**Initialize repo:**
-
-```Bash
-git init
-git add .
-git commit -m "Initial DevOps project"
-```
-
-**Push to GitHub:**
-
-```Bash
-git remote add origin YOUR_GITHUB_REPO
-
-git push -u origin main
-```
-
----
-
-# STEP 15 — ADD CI/CD PIPELINE
-
-**Create:**
-
-```Plain text
-.github/workflows/deploy.yml
-```
-
-**Paste:**
-
-```YAML
-name: Deploy Application
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-```
-
----
-
-# STEP 16 — SCREENSHOTS FOR RECRUITERS
-
-**Take screenshots of:**
-
-- Docker running
-- NGINX status
-- Linux terminal
-- htop monitoring
-- GitHub repo
-- CI/CD pipeline
-- Logs
-- Backup execution
-
-**Store inside:**
-
-```Plain text
-screenshots/
+```bash
+Developer Pushes Code
+        ↓
+GitHub Actions/Jenkins
+        ↓
+Linux Build Server
+        ↓
+Docker Build
+        ↓
+Testing
+        ↓
+Deploy to AWS EC2
+        ↓
+NGINX Reverse Proxy
+        ↓
+Production
 ```
